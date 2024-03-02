@@ -2,7 +2,7 @@ import { Router } from "express";
 import { 
     deleteOption,
     addVotes 
-} from "../controllers/option.controller";
+} from "../controllers/option.controller.js";
 
 const router = Router()
 
