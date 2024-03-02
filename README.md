@@ -97,3 +97,64 @@ This is a simple polling system API built with Node.js and [Database of Your Cho
 
     ```bash
      GET /api/v1/questions/:id
+
+# Folder Structure
+
+- src/
+  - controllers/
+    - question.controller.js
+    - option.controller.js
+  - models/
+    - questions.model.js
+    - options.model.js
+  - routes/
+    - question.routes.js
+    - option.routes.js
+  - utils/
+    - asyncHandler.js
+    - ApiResponse.js
+    - ApiError.js
+- vercel.json
+- app.js
+- .env.sample
+- package.json
+- README.md
+
+
+# API Endpoints
+
+
+- `/api/v1/questions/create` (POST)
+- `/api/v1/questions/:id/options/create` (POST)
+- `/api/v1/options/:id/add_vote` (POST)
+- `/api/v1/questions/:id` (GET)
+- `/api/v1/questions/:id` (DELETE)
+- `/api/v1/options/:id/delete` (DELETE)
+
+
+# Deployment
+This project can be easily deployed to Vercel using the provided vercel.json configuration.
+
+# Contributing
+Contributions are welcome! Feel free to open issues and pull requests.
+
+# License
+This project is licensed under the [Ramavtar Nagar] License - see the LICENSE file for details.
+
+# Response Example:
+
+  ```bash
+  {
+    "id": 1,
+    "title": "Who is your favorite from the Ninjas Mentors",
+    "options": [
+      {
+        "id": 1,
+        "text": "Aakash Tyagi",
+        "votes": 100,
+        "link_to_vote": "http://localhost:8000/options/1/add_vote"
+      },
+      // ... other options
+    ]
+  }
+
