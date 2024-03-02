@@ -17,10 +17,12 @@ app.use(express.static(
 ))
 
 //router import
-// import userRouter from './routes/user.routes.js'
+import questionRouter from './routes/question.routes.js'
+import optionRouter from './routes/option.routes.js'
 
-// //routes declaration
-// app.use("/api/v1/users", userRouter)
-// // http://localhost:8000/api/v1/users/register
+//routes declaration
+app.use("/api/v1/questions", questionRouter)
+app.use("/api/v1/options", optionRouter)
+// http://localhost:8000/api/v1/users/register
 
 export {app}
