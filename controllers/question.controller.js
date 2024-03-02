@@ -70,27 +70,30 @@ const deleteQuestion = asyncHandler( async(req, res) => {
     try {
         const { id } = req.params;
     
+                    console.log('Deleting question with ID:', id);
+
         const question = await Question.findById(id);
+
+                    console.log('Found question:', question);
         
         if(!question){
            throw new ApiError(404, "Question not Found!!!")
         }
     
-        // TODO = Implement logic to check if there are votes on options before deleting the question (optional)
         const optionsWithVotes = await Option.find({ questionId: question._id, votes: { $gt: 0 } });
 
         if (optionsWithVotes.length > 0) {
             throw new ApiError(400, 'Cannot delete question with options having existing votes')
         }
-        await question.remove();
+        const deletedQuestion = await Question.findByIdAndDelete(id);
     
         return res
-                .status(201)
+                .status(200)
                 .json(
                     new ApiResponse(
                         200,
-                        question,
-                        "Question Removed Successfully"
+                        deletedQuestion,
+                        "Question Deleted Successfully"
                     )
                 )
     } catch (error) {
@@ -98,12 +101,11 @@ const deleteQuestion = asyncHandler( async(req, res) => {
     }
 })
 
-
 const viewQuestion = asyncHandler( async(req, res) => {
     try {
         const { id } = req.params;
     
-        const question = awaitQuestion.findById(id).populate('options');
+        const question = await Question.findById(id).populate('options');
     
         if (!question) {
             throw new ApiError(404, "Question not Found!!!")
